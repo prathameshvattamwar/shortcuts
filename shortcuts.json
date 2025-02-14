@@ -1,0 +1,13 @@
+{
+    "keyboard": [
+        { "keys": "Ctrl + C", "description": "Copy selected text" },
+        { "keys": "Ctrl + V", "description": "Paste copied text" },
+        { "keys": "Ctrl + X", "description": "Cut selected text" },
+        { "keys": "Alt + Tab", "description": "Switch between open windows" },
+        { "keys": "Ctrl + Z", "description": "Undo last action" }
+    ],
+    "photoshop": [
+        { "keys": "Ctrl + N", "description": "Create a new file" },
+        { "keys": "Ctrl + S", "description": "Save the file" }
+    ]
+}
