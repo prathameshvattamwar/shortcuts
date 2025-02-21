@@ -1,0 +1,535 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap');
+
+* {
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* General Styles */
+body {
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    color: #ffffff;
+    transition: background 0.3s ease-in-out;
+}
+
+p{
+    margin-bottom: 0.5rem;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: -270px;
+    top: 0;
+    width: 270px;
+    height: 100vh; /* Ensures full height */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 1050;
+    overflow-y: auto; /* Enables vertical scrolling */
+    overflow-x: hidden; /* Prevents horizontal scroll */
+}
+
+/* Optional: Hide Scrollbar (For a Cleaner Look) */
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+
+.sidebar.open {
+    left: 0;
+}
+
+/* Sidebar Header */
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.sidebar h4 {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.close-btn {
+    cursor: pointer;
+    font-size: 22px;
+    transition: color 0.3s ease-in-out;
+    display: none;
+}
+
+.sidebar.open .close-btn {
+    display: block;
+}
+
+.close-btn:hover {
+    color: #ff3e3e;
+}
+
+/* Sidebar List */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+    margin: 5px 10px;
+}
+
+.sidebar ul li:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+/* Hamburger Icon */
+.hamburger {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #ffffff;
+    z-index: 1000;
+}
+
+.hamburger:hover {
+    transform: rotate(180deg);
+}
+
+/* Hide Hamburger Icon when Sidebar is Open */
+.sidebar.open + .hamburger {
+    display: none;
+}
+
+/* Content Area */
+.content {
+    margin-left: 50px;
+    padding: 20px;
+    text-align: center;
+    padding-top: 40px;
+}
+
+#category-title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+/* About Section */
+.about-container {
+    text-align: center;
+    padding: 0px;
+    max-width: 80vw;
+    margin: 50px auto;
+    /* background: rgba(255, 255, 255, 0.15); */
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    /* box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); */
+    animation: fadeIn 1s ease-in-out;
+}
+
+.about-container h1 {
+    font-size: 2.2rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.about-container h2 {
+    font-size: 1.8rem;
+    color: #f8d210;
+    margin-top: 30px;
+}
+
+.about-container p {
+    font-size: 1.2rem;
+    color: #dddddd;
+    margin: 10px 0;
+}
+
+.about-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about-container ul li {
+    font-size: 1.1rem;
+    margin: 8px 0;
+    color: #f2f2f2;
+    text-align: center;
+}
+
+/* .about-container ul li::before {
+    content: "✔ ";
+    color: #28a745;
+    font-weight: bold;
+} */
+
+/* Animation for smooth appearance */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hide Shortcut Container Initially */
+#shortcuts-container {
+    display: none;
+}
+
+/* Search Bar */
+.search-container {
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+#search-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2), inset -2px -2px 5px rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+#search-input:focus {
+    box-shadow: 2px 2px 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Shortcut Cards */
+#shortcuts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 10px; 
+    margin-top: 20px;
+    padding: 10px;
+    justify-content: center;
+}
+
+.shortcut-card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-width: 250px;
+    max-width: 100%;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.shortcut-card:hover {
+    transform: scale(1.03);
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+/* Shortcut Key Styling */
+.shortcut-key {
+    font-weight: 600;
+    background: #34a986;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Toggle Button Styling */
+.layout-toggle {
+    margin-bottom: 20px;
+    display: none;
+}
+
+.toggle-btn {
+    background: #1e3c72; /* Dark Blue */
+    color: white;
+    border: 2px solid #2a5298; /* Lighter Blue */
+    padding: 12px 20px;
+    margin: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    outline: none;
+}
+
+/* Hover Effect */
+.toggle-btn:hover {
+    background: #2a5298; /* Lighter Blue */
+    color: #f8f9fa;
+    border-color: #1e3c72;
+    transform: translateY(-2px);
+}
+
+/* Click (Active) Effect */
+.toggle-btn:active {
+    transform: translateY(1px);
+    background: #163a5f; /* Slightly Darker Blue */
+}
+
+/* Default Grid Layout */
+#shortcuts-container.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
+    justify-content: center;
+}
+
+/* List Layout */
+#shortcuts-container.list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Flip Card Layout */
+.shortcut-card.flip {
+    perspective: 1000px;
+    width: 300px;
+    height: 120px;
+    position: relative;
+    cursor: pointer;
+}
+
+.shortcut-card.flip .inner-card {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease-in-out;
+}
+
+.shortcut-card.flip:hover .inner-card {
+    transform: rotateY(180deg);
+}
+
+.shortcut-card.flip .front, .shortcut-card.flip .back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    text-align: center;
+}
+
+.shortcut-card.flip .front {
+    background: #1c4f86;
+    color: white;
+}
+
+.shortcut-card.flip .back {
+    background: rgba(255, 255, 255, 0.071);
+    backdrop-filter: blur(10px);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+/* Dark Mode */
+.dark-mode {
+    background: #121212;
+    color: #ffffff;
+}
+
+.dark-mode .shortcut-card {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .shortcut-key {
+    background: #d35400;
+}
+
+/* Floating Close Button */
+.close-sidebar {
+    position: fixed;
+    top: 20px;
+    left: -50px; /* Initially hidden */
+    width: 40px;
+    height: 40px;
+    /* background: rgba(255, 0, 0, 0.8); */
+    background: rgb(248 210 16);
+    color: white;
+    /* border-radius: 50%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
+}
+
+/* Show the Close Button when Sidebar is Open */
+.sidebar.open ~ .close-sidebar {
+    left: 280px; 
+}
+
+/* Footer Styles */
+.footer {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-align: center;
+    padding: 15px 10px;
+    margin-top: 20px;
+    backdrop-filter: blur(10px);
+    position: relative;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-links {
+    margin-top: 10px;
+}
+
+.footer-links a {
+    color: #f8d210;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-social {
+    margin-top: 10px;
+}
+
+.footer-social a {
+    color: white;
+    font-size: 20px;
+    margin: 0 8px;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-social a:hover {
+    color: #f8d210;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+    .about-container h2,
+    h2, 
+    h1{
+        font-size: 1.5rem !important;
+    }
+
+    p,
+    li{
+        font-size: 14px !important;
+    }
+
+    .sidebar.open ~ .close-sidebar {
+        left: 230px !important; 
+    }
+
+    .sidebar {
+        width: 230px;
+    }
+
+    .sidebar ul li {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    .content {
+        margin-left: 10px;
+        padding: 15px;
+    }
+
+    .hamburger {
+        font-size: 24px;
+        top: 15px;
+        left: 15px;
+    }
+
+    .shortcut-card {
+        max-width: 90%;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .shortcut-key {
+        padding: 6px 10px;
+    }
+
+    .about-container{
+        max-width: 90vw;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .sidebar ul li {
+        font-size: 0.9rem;
+    }
+
+    .hamburger {
+        font-size: 22px;
+    }
+
+    .sidebar.open ~ .close-sidebar {
+        left: 200px !important; 
+    }
+
+    .shortcut-card {
+        max-width: 95%;
+        font-size: 12px;
+        padding: 15px;
+    }
+
+    .shortcut-key {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+}
