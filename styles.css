@@ -384,8 +384,9 @@ body {
 
 /* Show the Close Button when Sidebar is Open */
 .sidebar.open ~ .close-sidebar {
-    left: 280px; /* Moves outside the sidebar */
+    left: 280px; 
 }
+
 
 /* Mobile Responsiveness */
 @media screen and (max-width: 768px) {
@@ -398,6 +399,10 @@ body {
     p,
     li{
         font-size: 14px !important;
+    }
+
+    .sidebar.open ~ .close-sidebar {
+        left: 230px !important; 
     }
 
     .sidebar {
@@ -446,6 +451,10 @@ body {
 
     .hamburger {
         font-size: 22px;
+    }
+
+    .sidebar.open ~ .close-sidebar {
+        left: 200px !important; 
     }
 
     .shortcut-card {
