@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shortcut Keys Reference</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <script src="https://kit.fontawesome.com/37df75b44e.js" crossorigin="anonymous"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h4>Shortcut Categories</h4>
+        </div>
+        
+        
+
+        <ul>
+            <!-- General & OS Shortcuts -->
+            <li onclick="loadShortcuts('keyboard')"><i class="fa fa-keyboard"></i> Keyboard</li>
+            <li onclick="loadShortcuts('windows')"><i class="fa fa-windows"></i> Windows</li>
+            <li onclick="loadShortcuts('mac')"><i class="fa fa-apple"></i> MacOS</li>
+            <li onclick="loadShortcuts('linux')"><i class="fa fa-linux"></i> Linux</li>
+            <li onclick="loadShortcuts('android')"><i class="fa fa-android"></i> Android</li>
+            <li onclick="loadShortcuts('ios')"><i class="fa fa-mobile"></i> iOS</li>
+        
+            <!-- Office & Productivity Apps -->
+            <li onclick="loadShortcuts('excel')"><i class="fa fa-table"></i> Excel</li>
+            <li onclick="loadShortcuts('word')"><i class="fa fa-file-word"></i> Word</li>
+            <li onclick="loadShortcuts('powerpoint')"><i class="fa fa-file-powerpoint"></i> PowerPoint</li>
+            <li onclick="loadShortcuts('outlook')"><i class="fa fa-envelope"></i> Outlook</li>
+            <li onclick="loadShortcuts('notepad')"><i class="fa fa-file-alt"></i> Notepad</li>
+            <li onclick="loadShortcuts('slack')"><i class="fa fa-slack"></i> Slack</li>
+            <li onclick="loadShortcuts('teams')"><i class="fa fa-users"></i> Microsoft Teams</li>
+            <li onclick="loadShortcuts('zoom')"><i class="fa fa-video"></i> Zoom</li>
+            <li onclick="loadShortcuts('google-docs')"><i class="fa fa-file"></i> Google Docs</li>
+            <li onclick="loadShortcuts('google-sheets')"><i class="fa fa-table"></i> Google Sheets</li>
+        
+            <!-- Browsers & Web Apps -->
+            <li onclick="loadShortcuts('chrome')"><i class="fa fa-chrome"></i> Google Chrome</li>
+            <li onclick="loadShortcuts('firefox')"><i class="fa fa-firefox"></i> Mozilla Firefox</li>
+            <li onclick="loadShortcuts('edge')"><i class="fa fa-edge"></i> Microsoft Edge</li>
+            <li onclick="loadShortcuts('brave')"><i class="fa fa-globe"></i> Brave Browser</li>
+            <li onclick="loadShortcuts('opera')"><i class="fa fa-opera"></i> Opera</li>
+        
+            <!-- Design & Media Apps -->
+            <li onclick="loadShortcuts('photoshop')"><i class="fa fa-photo-video"></i> Photoshop</li>
+            <li onclick="loadShortcuts('illustrator')"><i class="fa fa-palette"></i> Illustrator</li>
+            <li onclick="loadShortcuts('figma')"><i class="fa fa-drafting-compass"></i> Figma</li>
+            <li onclick="loadShortcuts('xd')"><i class="fa fa-pencil-ruler"></i> Adobe XD</li>
+            <li onclick="loadShortcuts('premiere')"><i class="fa fa-film"></i> Premiere Pro</li>
+            <li onclick="loadShortcuts('after-effects')"><i class="fa fa-magic"></i> After Effects</li>
+            <li onclick="loadShortcuts('blender')"><i class="fa fa-cube"></i> Blender</li>
+            <li onclick="loadShortcuts('canva')"><i class="fa fa-paint-brush"></i> Canva</li>
+        
+            <!-- Coding & Development Tools -->
+            <li onclick="loadShortcuts('vscode')"><i class="fa fa-code"></i> VS Code</li>
+            <li onclick="loadShortcuts('sublime')"><i class="fa fa-file-code"></i> Sublime Text</li>
+            <li onclick="loadShortcuts('intellij')"><i class="fa fa-coffee"></i> IntelliJ IDEA</li>
+            <li onclick="loadShortcuts('pycharm')"><i class="fa fa-python"></i> PyCharm</li>
+            <li onclick="loadShortcuts('eclipse')"><i class="fa fa-java"></i> Eclipse</li>
+            <li onclick="loadShortcuts('android-studio')"><i class="fa fa-android"></i> Android Studio</li>
+            <li onclick="loadShortcuts('terminal')"><i class="fa fa-terminal"></i> Terminal</li>
+            <li onclick="loadShortcuts('git')"><i class="fa fa-code-branch"></i> Git</li>
+        
+            <!-- Entertainment & Media -->
+            <li onclick="loadShortcuts('youtube')"><i class="fa fa-youtube"></i> YouTube</li>
+            <li onclick="loadShortcuts('discord')"><i class="fa fa-comments"></i> Discord</li>
+        
+            <!-- Gaming -->
+            <li onclick="loadShortcuts('steam')"><i class="fa fa-steam"></i> Steam</li>
+            <li onclick="loadShortcuts('epic-games')"><i class="fa fa-gamepad"></i> Epic Games</li>
+            <li onclick="loadShortcuts('xbox')"><i class="fa-brands fa-xbox"></i> Xbox</li>
+            <li onclick="loadShortcuts('playstation')"><i class="fa fa-playstation"></i> PlayStation</li>
+            <li onclick="loadShortcuts('twitch')"><i class="fa fa-twitch"></i> Twitch</li>
+        </ul>
+        
+    </div>
+
+    <!-- Floating Close Button -->
+    <div class="close-sidebar" onclick="toggleSidebar()">
+        <i class="fa fa-times"></i>
+    </div>
+
+    <!-- Hamburger Icon -->
+    <div class="hamburger" onclick="toggleSidebar()">
+        <i class="fa fa-bars"></i>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="content">
+        <h2 id="category-title" style="display: none;">Select a category to see shortcuts</h2>
+
+        <!-- Layout Toggle Buttons -->
+        <div class="layout-toggle" style="display: none;">
+            <button class="toggle-btn" onclick="setLayout('grid')">Grid View</button>
+            <button class="toggle-btn" onclick="setLayout('flip')">Flip View</button>
+        </div>
+
+        <!-- About Section (Initially Visible) -->
+        <div id="about-section" class="about-container">
+            <h1>Welcome to Shortcut Keys Reference</h1>
+            <p>
+                This website is your **one-stop destination** for learning and using **keyboard shortcuts** 
+                across various applications, operating systems, and tools. Whether you're a **professional**, 
+                **student**, or **casual user**, mastering keyboard shortcuts can **significantly boost productivity** 
+                and **efficiency** in your daily tasks.
+            </p>
+
+            <h2>Why Use Keyboard Shortcuts?</h2>
+            <ul>
+                <li><strong>Increase Productivity:</strong> Reduce the time spent on repetitive actions.</li>
+                <li><strong>Improve Efficiency:</strong> Perform tasks faster without relying on a mouse.</li>
+                <li><strong>Enhance Multitasking:</strong> Switch between applications effortlessly.</li>
+                <li><strong>Reduce Strain:</strong> Minimize hand movements and fatigue from excessive mouse use.</li>
+            </ul>
+
+            <h2>What You'll Find Here:</h2>
+            <p>
+                We have **categorized** shortcuts for various platforms, including:
+            </p>
+            <ul>
+                <li> Operating Systems** (Windows, Mac, Linux, Android, iOS)</li>
+                <li> Office & Productivity Apps** (Microsoft Office, Google Suite, Notepad, Outlook, Slack)</li>
+                <li> Web Browsers** (Chrome, Firefox, Edge, Brave, Opera)</li>
+                <li> Design & Media Software** (Photoshop, Illustrator, Premiere Pro, Figma, Canva)</li>
+                <li> Coding & Development Tools** (VS Code, Git, IntelliJ, PyCharm, Eclipse, Android Studio)</li>
+                <li> Social Media & Communication** (Discord, WhatsApp, Telegram, Twitter, LinkedIn)</li>
+                <li> Gaming & Entertainment** (Steam, Epic Games, Xbox, PlayStation, Twitch)</li>
+            </ul>
+
+            <p><strong> Select a category from the sidebar to get started!</strong></p>
+
+            <h2>How to Use This Website?</h2>
+            <p>
+                Click on the **menu (☰) icon** in the top-left corner to open the sidebar.<br>
+                Choose your desired **software or platform** from the list.<br>
+                The shortcut keys will appear in an **interactive grid format**.<br>
+                Use the **toggle buttons** to switch between **Grid View** or **Flip View**.<br>
+                Try out the shortcuts and improve your workflow! 🚀
+            </p>
+        </div>
+
+
+        <div id="shortcuts-container">
+            <!-- Shortcut keys will be displayed here dynamically -->
+        </div>
+    </div>
+
+    <!-- Bootstrap JS & Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
