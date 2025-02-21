@@ -1754,16 +1754,20 @@
     ],
 
     "steam": [
-        { "keys": "Shift + Tab", "description": "Open/close Steam overlay" },
-        { "keys": "F12", "description": "Take a screenshot" },
-        { "keys": "Ctrl + Tab", "description": "Switch between Steam tabs" },
+        { "keys": "Shift + Tab", "description": "Open/Close Steam Overlay" },
+        { "keys": "F12", "description": "Take Screenshot" },
+        { "keys": "Ctrl + Tab", "description": "Cycle Through Chat Windows" },
+        { "keys": "Alt + Enter", "description": "Toggle Fullscreen Mode" },
         { "keys": "Ctrl + Shift + B", "description": "Restart Steam" },
-        { "keys": "Ctrl + W", "description": "Close current window" },
-        { "keys": "Alt + Enter", "description": "Toggle fullscreen mode" },
-        { "keys": "Ctrl + Shift + Esc", "description": "Open Task Manager (useful if Steam freezes)" },
-        { "keys": "Ctrl + Shift + M", "description": "Open friends list" },
-        { "keys": "Ctrl + Shift + T", "description": "Reopen last closed tab" },
-        { "keys": "Shift + Click", "description": "Queue multiple game downloads" }
+        { "keys": "Ctrl + Shift + Esc", "description": "Force Quit Steam" },
+        { "keys": "Ctrl + W", "description": "Close Current Window" },
+        { "keys": "Ctrl + Shift + M", "description": "Toggle Big Picture Mode" },
+        { "keys": "Ctrl + Shift + L", "description": "Enable/Disable FPS Counter" },
+        { "keys": "Ctrl + G", "description": "Toggle Game Grid/List View" },
+        { "keys": "Ctrl + T", "description": "Open New Chat Window" },
+        { "keys": "Ctrl + N", "description": "Open New Friend Chat" },
+        { "keys": "Ctrl + Shift + Tab", "description": "Switch Between Steam Tabs" },
+        { "keys": "Shift + Click", "description": "Select Multiple Items" }
     ],
 
     "epic-games": [
@@ -1780,29 +1784,45 @@
     ],
 
     "xbox": [
-        { "keys": "Win + G", "description": "Open Xbox Game Bar" },
-        { "keys": "Win + Alt + R", "description": "Start/Stop recording gameplay" },
-        { "keys": "Win + Alt + G", "description": "Record the last 30 seconds of gameplay" },
-        { "keys": "Win + Alt + PrtScn", "description": "Take a screenshot" },
-        { "keys": "Win + Alt + M", "description": "Toggle microphone on/off while recording" },
-        { "keys": "Win + Alt + B", "description": "Turn on/off HDR" },
-        { "keys": "Win + Alt + T", "description": "Show/hide recording timer" },
-        { "keys": "Win + X", "description": "Open Xbox Quick Menu (Console)" },
-        { "keys": "RB + LB + X", "description": "Force quit a game (Console)" },
-        { "keys": "Xbox Button", "description": "Open Xbox Guide (Console)" }
+        { "keys": "Xbox Button", "description": "Open Guide Menu" },
+        { "keys": "Xbox Button (Hold)", "description": "Turn Off Console or Controller" },
+        { "keys": "Xbox Button + View Button", "description": "Open Capture & Share" },
+        { "keys": "Xbox Button + Menu Button", "description": "Open Settings" },
+        { "keys": "Xbox Button + D-Pad Left", "description": "Jump to Friends" },
+        { "keys": "Xbox Button + D-Pad Right", "description": "Jump to Parties & Chats" },
+        { "keys": "Xbox Button + X", "description": "Take a Screenshot" },
+        { "keys": "Xbox Button + Y", "description": "Record Last 30 Seconds" },
+        { "keys": "Xbox Button + A", "description": "Launch Game Pass" },
+        { "keys": "Xbox Button + B", "description": "Back to Home Screen" },
+        { "keys": "Xbox Button + Up Arrow", "description": "Jump to Notifications" },
+        { "keys": "Xbox Button + Down Arrow", "description": "Open Quick Settings" },
+        { "keys": "RB + LB", "description": "Switch Between Open Apps" },
+        { "keys": "LT + RT", "description": "Zoom In/Out (Certain Apps)" },
+        { "keys": "Left Stick Press (L3)", "description": "Enable Sprint (In-Game)" },
+        { "keys": "Right Stick Press (R3)", "description": "Toggle Crouch/Prone (In-Game)" }
     ],
 
     "playstation": [
-        { "keys": "PS Button", "description": "Open Control Center (PS5) / Quick Menu (PS4)" },
-        { "keys": "PS Button (Hold)", "description": "Turn off console or controller" },
-        { "keys": "PS Button (Double Tap)", "description": "Switch between recent apps/games" },
-        { "keys": "Share Button (Tap)", "description": "Open Share menu" },
-        { "keys": "Share Button (Hold)", "description": "Take a screenshot" },
-        { "keys": "Share Button (Double Tap)", "description": "Start/Stop video recording" },
-        { "keys": "Options Button", "description": "Open in-game options or settings" },
-        { "keys": "L1 + R1", "description": "Fast forward or rewind in media apps" },
-        { "keys": "L2 + R2", "description": "Zoom in/out in browser" },
-        { "keys": "Triangle Button", "description": "Jump to the top of a list" }
+        { "keys": "PS Button", "description": "Open Control Center" },
+        { "keys": "PS Button (Hold)", "description": "Turn Off Console or Controller" },
+        { "keys": "PS Button + Options", "description": "Close Application" },
+        { "keys": "PS Button + Triangle", "description": "Jump to Notifications" },
+        { "keys": "PS Button + D-Pad Left", "description": "Jump to Friends" },
+        { "keys": "PS Button + D-Pad Right", "description": "Jump to Parties" },
+        { "keys": "PS Button + R1", "description": "Switch to the Most Recent App/Game" },
+        { "keys": "PS Button + L1", "description": "Switch to the Previous App/Game" },
+        { "keys": "PS Button + Square", "description": "Jump to Music" },
+        { "keys": "PS Button + X", "description": "Open Quick Menu" },
+        { "keys": "PS Button + Down Arrow", "description": "Jump to Control Center" },
+        { "keys": "PS Button + Up Arrow", "description": "Jump to Home Screen" },
+        { "keys": "Options Button", "description": "Open Additional Options Menu" },
+        { "keys": "Share Button", "description": "Open Screenshot/Recording Menu" },
+        { "keys": "Share Button (Hold)", "description": "Take a Screenshot" },
+        { "keys": "Share Button + X", "description": "Start Video Recording" },
+        { "keys": "L1 + R1", "description": "Switch Between Open Apps" },
+        { "keys": "L2 + R2", "description": "Zoom In/Out (Certain Apps)" },
+        { "keys": "R3 (Press)", "description": "Enable/Disable Motion Controls" },
+        { "keys": "L3 (Press)", "description": "Enable/Disable Sprint (Games)" }
     ],
 
     "twitch": [
@@ -1815,7 +1835,16 @@
         { "keys": "Down Arrow", "description": "Decrease Volume" },
         { "keys": "Right Arrow", "description": "Skip Forward 10 Seconds" },
         { "keys": "Left Arrow", "description": "Rewind 10 Seconds" },
-        { "keys": "Ctrl + Enter", "description": "Send Chat Message" }
+        { "keys": "Ctrl + Enter", "description": "Send Chat Message" },
+        { "keys": "Alt + X", "description": "Toggle Stream Stats" },
+        { "keys": "Alt + R", "description": "Toggle Video Stats" },
+        { "keys": "Ctrl + Shift + C", "description": "Copy Video URL" },
+        { "keys": "1-9 (Number Keys)", "description": "Jump to Specific Chat Messages" },
+        { "keys": "Ctrl + U", "description": "Hide/Show Chat Users" },
+        { "keys": "/", "description": "Focus Chat Input" },
+        { "keys": "Ctrl + Shift + M", "description": "Open/Close Mod View (Moderators Only)" },
+        { "keys": "Alt + F4", "description": "Close Twitch Tab (Windows)" },
+        { "keys": "Cmd + W", "description": "Close Twitch Tab (Mac)" }
     ]
 
 }
