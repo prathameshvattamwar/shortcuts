@@ -1771,16 +1771,24 @@
     ],
 
     "epic-games": [
-        { "keys": "Ctrl + Shift + Esc", "description": "Open Task Manager (useful if the launcher is unresponsive)" },
-        { "keys": "Alt + Enter", "description": "Toggle fullscreen mode (in supported games)" },
-        { "keys": "Ctrl + Tab", "description": "Switch between open tabs in the launcher" },
-        { "keys": "F5", "description": "Refresh the Epic Games Store page" },
-        { "keys": "Ctrl + W", "description": "Close the current tab" },
-        { "keys": "Shift + Click", "description": "Queue multiple game downloads" },
-        { "keys": "Ctrl + Shift + N", "description": "Open a new window" },
+        { "keys": "Ctrl + Shift + Esc", "description": "Force Quit Epic Games Launcher" },
+        { "keys": "Ctrl + Alt + Delete", "description": "Open Task Manager (if Launcher is frozen)" },
+        { "keys": "F11", "description": "Toggle Fullscreen Mode" },
+        { "keys": "Ctrl + Shift + F", "description": "Toggle FPS Counter" },
+        { "keys": "Ctrl + G", "description": "Open Game Library" },
+        { "keys": "Ctrl + F", "description": "Search for Games" },
+        { "keys": "Alt + Enter", "description": "Toggle Windowed Mode" },
+        { "keys": "Ctrl + Shift + N", "description": "Open New Chat Window" },
+        { "keys": "Ctrl + T", "description": "Open Store Tab" },
+        { "keys": "Ctrl + W", "description": "Close Current Window" },
         { "keys": "Ctrl + Shift + B", "description": "Restart Epic Games Launcher" },
-        { "keys": "Ctrl + Shift + M", "description": "Open friends list" },
-        { "keys": "Ctrl + Shift + T", "description": "Reopen last closed tab" }
+        { "keys": "Shift + Tab", "description": "Open Friends Overlay" },
+        { "keys": "Ctrl + Shift + M", "description": "Mute Voice Chat" },
+        { "keys": "Ctrl + Enter", "description": "Send Message in Chat" },
+        { "keys": "Ctrl + Shift + L", "description": "Log Out of Epic Games Account" },
+        { "keys": "Ctrl + Shift + R", "description": "Refresh Epic Games Store" },
+        { "keys": "Ctrl + Shift + P", "description": "Open Payment & Transactions" },
+        { "keys": "Ctrl + Shift + E", "description": "Open Epic Games Support Page" }
     ],
 
     "xbox": [
