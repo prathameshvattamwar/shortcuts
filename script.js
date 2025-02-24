@@ -86,9 +86,9 @@ function copyToClipboard(text) {
 }
 
 // Dark Mode Toggle
-function toggleDarkMode() {
-  document.body.classList.toggle("dark-mode");
-}
+// function toggleDarkMode() {
+//   document.body.classList.toggle("dark-mode");
+// }
 
 function setLayout(layout) {
     let container = document.getElementById('shortcuts-container');
@@ -115,4 +115,68 @@ function setLayout(layout) {
             `;
         }
     });
+}
+
+//Download Shortcut in the form of PDF
+// async function downloadShortcuts() {
+//   const container = document.getElementById("shortcuts-container");
+//   const title = document.getElementById("category-title").innerText;
+
+//   const { jsPDF } = window.jspdf;
+//   const doc = new jsPDF();
+
+//   doc.setFont("Poppins", "normal");
+//   doc.setFontSize(14);
+//   doc.text(title, 10, 10);
+
+//   let y = 20; // Starting Y position
+
+//   container.querySelectorAll(".shortcut-card").forEach((card) => {
+//       const description = card.querySelector("span:first-child").innerText;
+//       const keys = card.querySelector(".shortcut-key").innerText;
+
+//       doc.text(`${description}: ${keys}`, 10, y);
+//       y += 10;
+//   });
+
+//   doc.save(`${title}.pdf`);
+// }
+
+async function downloadShortcuts() {
+  const container = document.getElementById("shortcuts-container");
+  const title = document.getElementById("category-title").innerText;
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  doc.setFont("helvetica", "normal"); // Use a common font
+  doc.setFontSize(14);
+  doc.text(title, 10, 10);
+
+  let y = 20; // Starting Y position
+  let pageHeight = doc.internal.pageSize.height - 20; // Account for page margins
+
+  // Select all shortcut cards, including those hidden
+  const cards = container.querySelectorAll(".shortcut-card");
+
+  if (cards.length === 0) {
+    alert("No shortcuts found to export!");
+    return;
+  }
+
+  cards.forEach((card, index) => {
+    const description = card.querySelector("span:first-child").innerText.trim();
+    const keys = card.querySelector(".shortcut-key").innerText.trim();
+
+    doc.text(`${description}: ${keys}`, 10, y);
+    y += 10;
+
+    // If text reaches the bottom, add a new page
+    if (y > pageHeight) {
+      doc.addPage();
+      y = 20; // Reset Y position for new page
+    }
+  });
+
+  doc.save(`${title}.pdf`);
 }
