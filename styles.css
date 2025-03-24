@@ -1,4 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Montserrat:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #1e3c72;
+  --secondary-color: #2a5298;
+  --accent-color: #f8d210;
+  --dark-bg: #0f172a;
+  --light-text: #ffffff;
+  --card-bg: rgba(255, 255, 255, 0.12);
+  --card-hover: rgba(255, 255, 255, 0.2);
+  --sidebar-bg: rgba(255, 255, 255, 0.1);
+  --shortcut-key-bg: #34a986;
+}
 
 * {
     font-family: "Poppins", sans-serif;
@@ -9,49 +21,68 @@
 
 /* General Styles */
 body {
-    background: linear-gradient(to right, #1e3c72, #2a5298);
-    color: #ffffff;
-    transition: background 0.3s ease-in-out;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--light-text);
+    transition: all 0.3s ease-in-out;
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-p{
+body.dark-mode {
+    --primary-color: #0f172a;
+    --secondary-color: #1e293b;
+    --shortcut-key-bg: #f97316;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+p {
     margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
 }
 
 /* Sidebar */
 .sidebar {
     position: fixed;
-    left: -270px;
+    left: -280px;
     top: 0;
-    width: 270px;
-    height: 100vh; /* Ensures full height */
-    background: rgba(255, 255, 255, 0.1);
+    width: 280px;
+    height: 100vh;
+    background: var(--sidebar-bg);
     backdrop-filter: blur(15px);
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease-in-out;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border-right: 1px solid rgba(255, 255, 255, 0.2);
     z-index: 1050;
-    overflow-y: auto; /* Enables vertical scrolling */
-    overflow-x: hidden; /* Prevents horizontal scroll */
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 20px;
 }
-
-/* Optional: Hide Scrollbar (For a Cleaner Look) */
-.sidebar::-webkit-scrollbar {
-    width: 5px;
-}
-
-.sidebar::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-}
-
-.sidebar::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
-}
-
 
 .sidebar.open {
     left: 0;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* Sidebar Header */
@@ -60,26 +91,29 @@ p{
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px;
 }
 
 .sidebar h4 {
     font-size: 1.4rem;
     font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.close-btn {
-    cursor: pointer;
-    font-size: 22px;
-    transition: color 0.3s ease-in-out;
-    display: none;
+/* Sidebar Categories */
+.category-group {
+    margin: 15px 0;
 }
 
-.sidebar.open .close-btn {
-    display: block;
-}
-
-.close-btn:hover {
-    color: #ff3e3e;
+.category-header {
+    padding: 10px 15px;
+    font-weight: 600;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* Sidebar List */
@@ -89,20 +123,32 @@ p{
 }
 
 .sidebar ul li {
-    padding: 12px;
+    padding: 12px 15px;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 10px;
     font-size: 1rem;
     transition: all 0.3s ease-in-out;
-    border-radius: 10px;
-    margin: 5px 10px;
+    border-radius: 8px;
+    margin: 2px 10px;
+}
+
+.sidebar ul li i {
+    width: 20px;
+    text-align: center;
 }
 
 .sidebar ul li:hover {
     background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.05);
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar ul li.active {
+    background: var(--accent-color);
+    color: var(--dark-bg);
+    font-weight: 500;
 }
 
 /* Hamburger Icon */
@@ -110,88 +156,168 @@ p{
     position: fixed;
     top: 20px;
     left: 20px;
-    font-size: 28px;
+    font-size: 24px;
     cursor: pointer;
-    color: #ffffff;
+    color: var(--light-text);
     z-index: 1000;
+    background: rgba(255, 255, 255, 0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
 }
 
 .hamburger:hover {
-    transform: rotate(180deg);
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
 }
 
-/* Hide Hamburger Icon when Sidebar is Open */
-.sidebar.open + .hamburger {
-    display: none;
+/* Floating Close Button */
+.close-sidebar {
+    position: fixed;
+    top: 20px;
+    left: -50px;
+    width: 40px;
+    height: 40px;
+    background: var(--accent-color);
+    color: var(--dark-bg);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    z-index: 1060;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar.open ~ .close-sidebar {
+    left: 290px;
+}
+
+.close-sidebar:hover {
+    transform: scale(1.05);
+    background: #f7c500;
 }
 
 /* Content Area */
 .content {
     margin-left: 50px;
-    padding: 20px;
+    padding: 30px 20px;
     text-align: center;
-    padding-top: 40px;
+    flex: 1;
+    max-width: 100%;
+    transition: all 0.3s ease;
 }
 
 #category-title {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: var(--light-text);
+    font-family: 'Montserrat', sans-serif;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: inline-block;
+}
+
+#category-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--accent-color);
+    border-radius: 10px;
 }
 
 /* About Section */
 .about-container {
     text-align: center;
-    padding: 0px;
-    max-width: 80vw;
-    margin: 50px auto;
-    /* background: rgba(255, 255, 255, 0.15); */
+    max-width: 1200px;
+    margin: 40px auto;
+    margin-bottom: 0;
+    /* background: rgba(255, 255, 255, 0.07); */
     backdrop-filter: blur(10px);
-    border-radius: 10px;
-    /* box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); */
+    border-radius: 16px;
+    /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); */
+    padding: 40px;
     animation: fadeIn 1s ease-in-out;
+    /* border: 1px solid rgba(255, 255, 255, 0.1);*/
 }
 
 .about-container h1 {
-    font-size: 2.2rem;
-    color: #ffffff;
-    margin-bottom: 10px;
+    font-size: 2.4rem;
+    color: var(--light-text);
+    margin-bottom: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
 }
 
 .about-container h2 {
     font-size: 1.8rem;
-    color: #f8d210;
+    color: var(--accent-color);
     margin-top: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
 }
 
 .about-container p {
-    font-size: 1.2rem;
-    color: #dddddd;
-    margin: 10px 0;
+    font-size: 1.1rem;
+    color: #e6e6e6;
+    margin: 15px 0;
+    line-height: 1.7;
+}
+
+.about-container b {
+    color: var(--accent-color);
+    font-weight: 600;
 }
 
 .about-container ul {
     list-style: none;
-    padding: 0;
+    padding: 10px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin: 20px 0;
 }
 
 .about-container ul li {
-    font-size: 1.1rem;
-    margin: 8px 0;
+    font-size: 1.05rem;
+    margin: 10px 0;
     color: #f2f2f2;
-    text-align: center;
+    position: relative;
+    padding-left: 25px;
+    text-align: left;
 }
 
-/* .about-container ul li::before {
-    content: "✔ ";
-    color: #28a745;
+.about-container ul li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
     font-weight: bold;
-} */
+}
+
+.about-container strong {
+    color: var(--accent-color);
+    font-weight: 600;
+}
 
 /* Animation for smooth appearance */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(-20px);
     }
     to {
         opacity: 1;
@@ -199,47 +325,63 @@ p{
     }
 }
 
-/* Hide Shortcut Container Initially */
-#shortcuts-container {
-    display: none;
-}
-
 /* Search Bar */
 .search-container {
-    margin: 20px auto;
-    max-width: 400px;
+    margin: 20px auto 30px;
+    max-width: 500px;
+    position: relative;
 }
 
 #search-input {
     width: 100%;
-    padding: 12px;
+    padding: 15px 20px 15px 45px;
     font-size: 16px;
-    border-radius: 10px;
+    border-radius: 12px;
     border: none;
     outline: none;
-    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2), inset -2px -2px 5px rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--light-text);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
 }
 
+#search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
 #search-input:focus {
-    box-shadow: 2px 2px 10px rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 18px;
 }
 
 /* Shortcut Cards */
 #shortcuts-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-    gap: 10px; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
     margin-top: 20px;
     padding: 10px;
     justify-content: center;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .shortcut-card {
-    background: rgba(255, 255, 255, 0.12);
+    background: var(--card-bg);
     backdrop-filter: blur(10px);
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -247,67 +389,170 @@ p{
     text-align: center;
     min-width: 250px;
     max-width: 100%;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    min-height: 140px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
 }
 
 .shortcut-card:hover {
-    transform: scale(1.03);
-    background: rgba(255, 255, 255, 0.2);
-    cursor: pointer;
+    transform: translateY(-5px);
+    background: var(--card-hover);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.shortcut-card:hover .shortcut-key {
+    background: var(--accent-color);
+    color: var(--dark-bg);
+}
+
+.shortcut-card:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent-color);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.shortcut-card:hover:before {
+    opacity: 1;
 }
 
 /* Shortcut Key Styling */
 .shortcut-key {
     font-weight: 600;
-    background: #34a986;
+    background: var(--shortcut-key-bg);
     color: white;
     padding: 8px 15px;
-    border-radius: 5px;
-    margin-top: 10px;
+    border-radius: 8px;
+    margin-top: 15px;
     font-size: 14px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.shortcut-key kbd {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 5px;
+    border-radius: 4px;
+    margin: 0 2px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.copy-icon {
+    margin-left: 8px;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.shortcut-card:hover .copy-icon {
+    opacity: 1;
 }
 
 /* Toggle Button Styling */
+.controls-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
 .layout-toggle {
-    margin-bottom: 20px;
     display: none;
 }
 
+.theme-toggle {
+    margin-left: 15px;
+}
+
 .toggle-btn {
-    background: #1e3c72; /* Dark Blue */
+    background: rgba(255, 255, 255, 0.1);
     color: white;
-    border: 2px solid #2a5298; /* Lighter Blue */
+    border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 12px 20px;
-    margin: 5px;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 15px;
+    font-weight: 500;
     transition: all 0.3s ease-in-out;
     outline: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(10px);
 }
 
-/* Hover Effect */
+.toggle-btn i {
+    font-size: 16px;
+}
+
 .toggle-btn:hover {
-    background: #2a5298; /* Lighter Blue */
-    color: #f8f9fa;
-    border-color: #1e3c72;
+    background: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Click (Active) Effect */
-.toggle-btn:active {
-    transform: translateY(1px);
-    background: #163a5f; /* Slightly Darker Blue */
+.toggle-btn.active {
+    background: var(--accent-color);
+    color: var(--dark-bg);
+    border-color: var(--accent-color);
+}
+
+/* Sort and Filter dropdowns */
+.filter-dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background: rgba(30, 41, 59, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 10px 0;
+    width: 200px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.filter-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Default Grid Layout */
 #shortcuts-container.grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 10px;
-    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
 }
 
 /* List Layout */
@@ -315,13 +560,34 @@ p{
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 10px;
+}
+
+#shortcuts-container.list .shortcut-card {
+    width: 100%;
+    max-width: 700px;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    padding: 15px 20px;
+}
+
+#shortcuts-container.list .shortcut-card span:first-child {
+    flex: 1;
+    text-align: left;
+}
+
+#shortcuts-container.list .shortcut-key {
+    margin-top: 0;
+    margin-left: 15px;
+    min-width: 120px;
+    text-align: center;
 }
 
 /* Flip Card Layout */
 .shortcut-card.flip {
     perspective: 1000px;
-    width: 300px;
-    height: 120px;
+    height: 150px;
     position: relative;
     cursor: pointer;
 }
@@ -346,190 +612,1136 @@ p{
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 20px;
     text-align: center;
 }
 
 .shortcut-card.flip .front {
-    background: #1c4f86;
+    background: rgba(42, 82, 152, 0.6);
+    backdrop-filter: blur(10px);
     color: white;
 }
 
 .shortcut-card.flip .back {
-    background: rgba(255, 255, 255, 0.071);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     color: white;
     transform: rotateY(180deg);
-}
-
-/* Dark Mode */
-.dark-mode {
-    background: #121212;
-    color: #ffffff;
-}
-
-.dark-mode .shortcut-card {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.dark-mode .shortcut-key {
-    background: #d35400;
-}
-
-/* Floating Close Button */
-.close-sidebar {
-    position: fixed;
-    top: 20px;
-    left: -50px; /* Initially hidden */
-    width: 40px;
-    height: 40px;
-    /* background: rgba(255, 0, 0, 0.8); */
-    background: rgb(248 210 16);
-    color: white;
-    /* border-radius: 50%; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 22px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    z-index: 1000;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
-}
-
-/* Show the Close Button when Sidebar is Open */
-.sidebar.open ~ .close-sidebar {
-    left: 280px; 
+    font-weight: 600;
+    font-size: 18px;
 }
 
 /* Footer Styles */
 .footer {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
     color: white;
     text-align: center;
-    padding: 15px 10px;
-    margin-top: 20px;
+    padding: 25px 15px;
+    margin-top: 10px;
     backdrop-filter: blur(10px);
     position: relative;
-    bottom: 0;
-    right: 0;
-    left: 0;
     width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-container {
     max-width: 1200px;
     margin: auto;
-}
-
-.footer-links {
-    margin-top: 10px;
-}
-
-.footer-links a {
-    color: #f8d210;
-    text-decoration: none;
-    margin: 0 10px;
-}
-
-.footer-links a:hover {
-    text-decoration: underline;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .footer-social {
-    margin-top: 10px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 }
 
 .footer-social a {
     color: white;
-    font-size: 20px;
-    margin: 0 8px;
-    transition: color 0.3s ease-in-out;
+    background: rgba(255, 255, 255, 0.1);
+    width: 40px;
+    height: 40px;
+    text-decoration: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    transition: all 0.3s ease-in-out;
 }
 
 .footer-social a:hover {
-    color: #f8d210;
+    background: var(--accent-color);
+    color: var(--dark-bg);
+    transform: translateY(-3px);
+}
+
+/* Favorites Feature */
+.favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 5;
+}
+
+.favorite-btn:hover, .favorite-btn.active {
+    color: var(--accent-color);
+    transform: scale(1.2);
+}
+
+.favorite-btn.active {
+    animation: pulse 1s ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1.2); }
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: rgba(15, 23, 42, 0.95);
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    color: var(--accent-color);
+    transform: rotate(90deg);
+}
+
+.modal-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.modal-body {
+    margin-bottom: 20px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
 }
 
 /* Mobile Responsiveness */
 @media screen and (max-width: 768px) {
-    .about-container h2,
-    h2, 
-    h1{
-        font-size: 1.5rem !important;
-    }
-
-    p,
-    li{
-        font-size: 14px !important;
-    }
-
-    .sidebar.open ~ .close-sidebar {
-        left: 230px !important; 
-    }
-
     .sidebar {
-        width: 230px;
+        width: 250px;
+        left: -250px;
     }
-
-    .sidebar ul li {
-        font-size: 1rem;
-        padding: 12px;
+    
+    .sidebar.open ~ .close-sidebar {
+        left: 260px;
     }
-
-    .content {
-        margin-left: 10px;
-        padding: 15px;
-    }
-
-    .hamburger {
-        font-size: 24px;
-        top: 15px;
-        left: 15px;
-    }
-
-    .shortcut-card {
+    
+    .about-container {
         max-width: 90%;
-        padding: 12px;
-        font-size: 14px;
+        padding: 25px;
     }
-
-    .shortcut-key {
-        padding: 6px 10px;
+    
+    .about-container h1 {
+        font-size: 1.8rem;
     }
-
-    .about-container{
-        max-width: 90vw;
+    
+    .about-container h2 {
+        font-size: 1.4rem;
+    }
+    
+    .about-container p, .about-container li {
+        font-size: 1rem;
+    }
+    
+    .about-container ul {
+        grid-template-columns: 1fr;
+    }
+    
+    #shortcuts-container.list .shortcut-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    #shortcuts-container.list .shortcut-card span:first-child {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    
+    #shortcuts-container.list .shortcut-key {
+        margin-top: 10px;
+        margin-left: 0;
+    }
+    
+    .controls-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .toggle-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .search-container {
+        width: 90%;
     }
 }
 
 @media screen and (max-width: 480px) {
     .sidebar {
-        width: 200px;
+        width: 230px;
+        left: -230px;
     }
-
+    
+    .sidebar.open ~ .close-sidebar {
+        left: 240px !important;
+    }
+    
     .sidebar ul li {
         font-size: 0.9rem;
+        padding: 10px;
     }
-
-    .hamburger {
-        font-size: 22px;
+    
+    #category-title {
+        font-size: 1.5rem;
     }
-
-    .sidebar.open ~ .close-sidebar {
-        left: 200px !important; 
-    }
-
+    
     .shortcut-card {
-        max-width: 95%;
-        font-size: 12px;
+        min-height: 120px;
         padding: 15px;
     }
-
+    
     .shortcut-key {
         font-size: 12px;
-        padding: 5px 8px;
+        padding: 6px 10px;
+    }
+    
+    .content {
+        padding: 20px 10px;
+        margin-left: 10px;
+    }
+}
+
+/* Animations */
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.shortcut-card {
+    animation: slideInFromLeft 0.3s forwards;
+}
+
+/* Animation delay for cards */
+#shortcuts-container .shortcut-card:nth-child(1) { animation-delay: 0.05s; }
+#shortcuts-container .shortcut-card:nth-child(2) { animation-delay: 0.1s; }
+#shortcuts-container .shortcut-card:nth-child(3) { animation-delay: 0.15s; }
+#shortcuts-container .shortcut-card:nth-child(4) { animation-delay: 0.2s; }
+#shortcuts-container .shortcut-card:nth-child(5) { animation-delay: 0.25s; }
+/* And so on... */
+
+/* Keyboard key styling */
+.key {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin: 0 2px;
+    font-family: monospace;
+    font-size: 14px;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Toast Notification */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.toast {
+    background: rgba(15, 23, 42, 0.9);
+    color: white;
+    border-left: 4px solid var(--accent-color);
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-top: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.toast.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.toast i {
+    color: var(--accent-color);
+    font-size: 20px;
+}
+
+.toast-message {
+    flex: 1;
+}
+
+.close-toast {
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.close-toast:hover {
+    color: white;
+}
+
+/* Tooltip */
+.tooltip {
+    position: relative;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    background-color: rgba(15, 23, 42, 0.9);
+    color: white;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+    white-space: nowrap;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Quick Start Guide */
+.quick-start {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    color: var(--dark-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.quick-start:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* No results message */
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Loading animation */
+.loading {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 40px auto;
+}
+
+.loading div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.loading div:nth-child(1) {
+    left: 8px;
+    animation: loading1 0.6s infinite;
+}
+
+.loading div:nth-child(2) {
+    left: 8px;
+    animation: loading2 0.6s infinite;
+}
+
+.loading div:nth-child(3) {
+    left: 32px;
+    animation: loading2 0.6s infinite;
+}
+
+.loading div:nth-child(4) {
+    left: 56px;
+    animation: loading3 0.6s infinite;
+}
+
+@keyframes loading1 {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+@keyframes loading2 {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(24px, 0); }
+}
+
+@keyframes loading3 {
+    0% { transform: scale(1); }
+    100% { transform: scale(0); }
+}
+
+/* Shortcut Type Labels */
+.shortcut-type {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 10px;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 3px 8px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+}
+
+/* Favorites page styling */
+.favorites-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.favorites-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--light-text);
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+}
+
+.clear-favorites {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.clear-favorites:hover {
+    background: rgba(255, 0, 0, 0.2);
+}
+
+/* Practice mode styling */
+.practice-container {
+    max-width: 700px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.practice-description {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.practice-keys {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.practice-key {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 15px 20px;
+    font-size: 20px;
+    min-width: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.practice-input {
+    position: relative;
+    margin-top: 30px;
+}
+
+.practice-input input {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    outline: none;
+}
+
+.practice-input input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(248, 210, 16, 0.2);
+}
+
+.practice-result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.practice-result.success {
+    color: #4ade80;
+}
+
+.practice-result.error {
+    color: #f87171;
+}
+
+.practice-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.practice-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.practice-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.practice-btn.next {
+    background: var(--accent-color);
+    color: var(--dark-bg);
+}
+
+.practice-progress {
+    margin: 20px 0;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--accent-color);
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+/* Recent Shortcuts Section */
+.recent-shortcuts {
+    max-width: 800px;
+    margin: 30px auto;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.recent-shortcuts h2 {
+    margin-bottom: 20px;
+    color: var(--accent-color);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.recent-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.recent-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.recent-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-3px);
+}
+
+.recent-key {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--accent-color);
+    margin-top: 8px;
+}
+
+/* Settings modal styling */
+.settings-group {
+    margin-bottom: 20px;
+}
+
+.settings-group h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: var(--accent-color);
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.setting-label {
+    font-size: 16px;
+    color: white;
+}
+
+/* Select Dropdown Styles */
+.setting-select {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 14px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    width: 160px;
+    outline: none;
+    transition: all 0.3s ease;
+    position: relative;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 36px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.setting-select:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.setting-select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(248, 210, 16, 0.2);
+}
+
+/* Styling for dropdown options - only works in Firefox */
+.setting-select option {
+    background-color: #1e3c72;
+    color: white;
+    padding: 10px;
+}
+
+/* Style for setting buttons */
+.setting-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.setting-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.setting-btn.danger {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+.setting-btn.danger:hover {
+    background: rgba(239, 68, 68, 0.3);
+}
+
+/* For better mobile compatibility */
+@media screen and (max-width: 576px) {
+    .setting-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .setting-select {
+        width: 100%;
+    }
+    
+    .setting-btn {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--accent-color);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--accent-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Fix for the overall mobile layout */
+@media screen and (max-width: 768px) {
+    /* Main container adjustments */
+    .content {
+        margin-left: 0;
+        padding: 15px 10px;
+        width: 100%;
+        overflow-x: hidden;
+    }
+    
+    /* Category title */
+    #category-title {
+        font-size: 1.6rem;
+        margin: 10px 0 15px;
+    }
+    
+    /* Controls container (buttons row) */
+    .controls-container {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 10px;
+        margin: 0 -10px 20px;
+        padding: 0 10px 10px;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        gap: 8px;
+    }
+    
+    /* Button styling for mobile */
+    /* .toggle-btn {
+        flex: 0 0 auto;
+        padding: 8px 12px;
+        font-size: 13px;
+        white-space: nowrap;
+        scroll-snap-align: start;
+        min-width: auto;
+    } */
+    
+    /* .toggle-btn i {
+        margin-right: 5px;
+    } */
+    
+    /* Hide scrollbar but keep functionality */
+    .controls-container::-webkit-scrollbar {
+        display: none;
+    }
+    
+    /* Cards container */
+    #shortcuts-container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Card styling */
+    .shortcut-card {
+        width: 100%;
+        margin: 0 0 10px;
+        min-height: auto;
+        padding: 15px;
+    }
+    
+    /* Keycode buttons in cards */
+    .shortcut-key {
+        font-size: 13px;
+        padding: 6px 10px;
+        margin-top: 10px;
+    }
+    
+    .shortcut-key kbd {
+        font-size: 12px;
+        padding: 2px 4px;
+    }
+    
+    /* Star icon positioning */
+    .favorite-btn {
+        top: 8px;
+        right: 8px;
+        font-size: 14px;
+    }
+    
+    /* Adjustments for list view on mobile */
+    #shortcuts-container.list .shortcut-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    #shortcuts-container.list .shortcut-card span:first-child {
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
+    #shortcuts-container.list .shortcut-key {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+/* Smaller mobile devices */
+@media screen and (max-width: 480px) {
+    /* Sidebar sizing on very small screens */
+    .sidebar {
+        width: 85%;
+        left: -85%;
+    }
+    
+    .sidebar.open ~ .close-sidebar {
+        left: calc(85% + 10px);
+    }
+    
+    /* Card adjustments for very small screens */
+    .shortcut-card {
+        padding: 12px;
+    }
+    
+    /* Hamburger positioning */
+    .hamburger {
+        top: 10px;
+        left: 10px;
+    }
+    
+    /* Title should be even smaller on very small screens */
+    #category-title {
+        font-size: 1.4rem;
+    }
+    
+    /* Fix for the action buttons */
+    .toggle-btn {
+        padding: 15px;
+        font-size: 12px;
+    }
+    
+    /* Flip cards need special handling on small screens */
+    .shortcut-card.flip {
+        height: 120px;
+    }
+}
+
+/* Fix for keyboard key display on mobile */
+@media screen and (max-width: 768px) {
+    .shortcut-key kbd {
+        display: inline-block;
+        padding: 1px 3px;
+        font-size: 11px;
+        margin: 0 1px;
+    }
+    
+    /* Windows/Mac key styling */
+    .shortcut-key kbd:first-of-type {
+        background: rgba(52, 169, 134, 0.3);
+        border: 1px solid rgba(52, 169, 134, 0.5);
+    }
+}
+
+/* Fix for flip cards on mobile */
+@media screen and (max-width: 768px) {
+    .shortcut-card.flip .front,
+    .shortcut-card.flip .back {
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    .shortcut-card.flip {
+        height: 100px;
+    }
+}
+
+/* Fix for dark mode toggle positioning on mobile */
+@media screen and (max-width: 768px) {
+    #theme-toggle {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    #theme-toggle i {
+        margin-right: 0;
+    }
+}
+
+/* Fix for practice mode on mobile */
+@media screen and (max-width: 768px) {
+    .practice-container {
+        padding: 15px;
+    }
+    
+    .practice-description {
+        font-size: 1rem;
+    }
+    
+    .practice-keys {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .practice-key {
+        padding: 10px 15px;
+        font-size: 16px;
+        min-width: 40px;
+    }
+    
+    .practice-input input {
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    .practice-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .practice-btn {
+        width: 100%;
+    }
+}
+
+/* Fixing search bar on mobile */
+@media screen and (max-width: 768px) {
+    .search-container {
+        width: 100%;
+        margin: 15px auto;
+    }
+    
+    #search-input {
+        padding: 12px 15px 12px 40px;
+        font-size: 14px;
+    }
+    
+    .search-icon {
+        left: 12px;
+        z-index: 99;
+    }
+}
+
+/* Modal fixes for mobile */
+@media screen and (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        padding: 20px 15px;
+        max-height: 85vh;
+    }
+    
+    .modal-title {
+        font-size: 1.4rem;
+    }
+    
+    .close-modal {
+        top: 10px;
+        right: 10px;
+    }
+    
+    /* Prevent body scroll when modal is open */
+    body.modal-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+    }
+    
+    /* Settings inputs on mobile */
+    .setting-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .setting-select,
+    .setting-btn {
+        width: 100%;
+    }
+    .dif_views{
+        display: none;
+    }
+}
+
+/* Help ensure no horizontal overflow */
+body {
+    overflow-x: hidden;
+}
+
+/* Fix for Win + key display on small devices */
+@media screen and (max-width: 480px) {
+    .shortcut-key {
+        display: inline-block;
+        width: auto;
+        padding: 6px 10px;
+    }
+
+    .dif_views{
+        display: none;
     }
 }
